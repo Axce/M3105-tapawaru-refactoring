@@ -263,65 +263,8 @@ public class BottomPanel extends JPanel implements KeyListener
 		/* ****************************************TERRA******************************************** */
 		if (this.caseSelected)
 		{
-			switch (e.getKeyChar())
-			{
-						/* *****************************Counter Clock Spin******************* */
-			case 'w':
-				this.characterSelected = null;
-				this.mapGui.setSelectedCharacterPosition(null);
-				Terra.glyphCCWspin(this.map, currentCellPosition);
-				this.mapGui.printGlyph(this.mapGui.getGraphics());
-				this.mapGui.changeCellState(currentCellPosition.getPositionX(), currentCellPosition
-						.getPositionY());
-				try
-				{
-					this.right = ImageIO.read(new File("img/botScreen/"+playingTeam.getColorTeam()+"/right.png"));
-				} catch (IOException k)
-				{
-					// TODO Auto-generated catch block
-					k.printStackTrace();
-				}
-				this.paint(this.getGraphics());
-				break;
-						/* *****************************Clock Spin******************* */
-			case 'x':
-				this.characterSelected = null;
-				this.mapGui.setSelectedCharacterPosition(null);
-				Terra.glyphCWspin(this.map, currentCellPosition);
-				this.mapGui.printGlyph(this.mapGui.getGraphics());
-				this.mapGui.changeCellState(currentCellPosition.getPositionX(), currentCellPosition
-						.getPositionY());
-				try
-				{
-					this.right = ImageIO.read(new File("img/botScreen/"+playingTeam.getColorTeam()+"/right.png"));
-				} catch (IOException k)
-				{
-					// TODO Auto-generated catch block
-					k.printStackTrace();
-				}
-				this.paint(this.getGraphics());
-				break;
-						/* *****************************Random******************* */
-			case 'c':
-				this.characterSelected = null;
-				this.mapGui.setSelectedCharacterPosition(null);
-				Terra.glyphRandom(this.map, currentCellPosition);
-				this.mapGui.printGlyph(this.mapGui.getGraphics());
-				this.mapGui.changeCellState(currentCellPosition.getPositionX(), currentCellPosition
-						.getPositionY());
-				this.paint(this.getGraphics());
-				try
-				{
-					this.right = ImageIO.read(new File("img/botScreen/"+playingTeam.getColorTeam()+"/right.png"));
-				} catch (IOException k)
-				{
-					// TODO Auto-generated catch block
-					k.printStackTrace();
-				}
-				break;
-						/* *****************************Invalid Input******************* */
-			default:
-			}
+			if (e.getKeyChar() == 'w' || e.getKeyChar() == 'x' || e.getKeyChar() == 'c')
+				terraKeyProcess(e, playingTeam, currentCellPosition);
 		}
 		
 		/* ****************************************Character Selection******************************************** */		
@@ -467,6 +410,42 @@ public class BottomPanel extends JPanel implements KeyListener
 			default:
 			}
 		}
+	}
+
+	private void terraKeyProcess(KeyEvent e, Team playingTeam,
+			CellPosition currentCellPosition)
+	{
+		
+		this.characterSelected = null;
+		this.mapGui.setSelectedCharacterPosition(null);
+		switch (e.getKeyChar())
+		{
+					/* *****************************Counter Clock Spin******************* */
+		case 'w':
+			Terra.glyphCCWspin(this.map, currentCellPosition);
+			break;
+					/* *****************************Clock Spin******************* */
+		case 'x':
+			Terra.glyphCWspin(this.map, currentCellPosition);
+			break;
+					/* *****************************Random******************* */
+		case 'c':
+			Terra.glyphRandom(this.map, currentCellPosition);
+			break;
+		}
+		this.mapGui.printGlyph(this.mapGui.getGraphics());
+		this.mapGui.changeCellState(currentCellPosition.getPositionX(), currentCellPosition
+				.getPositionY());
+		try
+		{
+			this.right = ImageIO.read(new File("img/botScreen/"+playingTeam.getColorTeam()+"/right.png"));
+		} catch (IOException k)
+		{
+			// TODO Auto-generated catch block
+			k.printStackTrace();
+		}
+		this.paint(this.getGraphics());
+
 	}
 
 	private void eKeyProcess(Team playingTeam)
