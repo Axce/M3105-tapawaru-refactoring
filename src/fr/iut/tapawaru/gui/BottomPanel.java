@@ -209,7 +209,6 @@ public class BottomPanel extends JPanel implements KeyListener
 
 		if(this.audio.getP().isEndOfMediaReached())
 		{
-			System.out.println("yolo");
 			this.audio = new Audio(Audio.BACKGROUND_MUSIQUE);
 			this.audio.run();
 		}
