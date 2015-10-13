@@ -331,8 +331,7 @@ public class BottomPanel extends JPanel implements KeyListener
 		case 'a':
 			if(!(this.map.getSelectedCell()==null))
 				this.mapGui.changeCellState(currentCellPosition.getPositionX(),currentCellPosition.getPositionY());
-			if (!playingTeam.getCharacter()[0].isAlive())
-				break;
+			if (playingTeam.getCharacter()[0].isAlive())
 				aKeyProcess(playingTeam);
 			this.repaint();
 			break;
