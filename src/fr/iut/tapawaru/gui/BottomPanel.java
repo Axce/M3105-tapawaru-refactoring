@@ -339,55 +339,8 @@ public class BottomPanel extends JPanel implements KeyListener
 		case 'z':
 			if(!(this.map.getSelectedCell()==null))
 				this.mapGui.changeCellState(currentCellPosition.getPositionX(),currentCellPosition.getPositionY());
-			if (!playingTeam.getCharacter()[1].isAlive())
-				break;
-			if (this.characterSelected == null)
-			{
-				this.mapGui.paintGivenCell(playingTeam.getCharacter()[1].getCellTraveled().getPosition(),
-						playingTeam.getColorTeam() + "Selected");
-				this.characterSelected = playingTeam.getCharacter()[1];
-				this.mapGui.setSelectedCharacterPosition(playingTeam.getCharacter()[1].getCellTraveled()
-						.getPosition());
-				try
-				{
-					this.right = ImageIO.read(new File("img/botScreen/"+playingTeam.getColorTeam()+"/rightZ.png"));
-				} catch (IOException e1)
-				{
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			} else if (this.characterSelected == playingTeam.getCharacter()[1])
-			{
-				this.mapGui.paintGivenCell(playingTeam.getCharacter()[1].getCellTraveled().getPosition(),
-						playingTeam.getColorTeam().toString());
-				this.characterSelected = null;
-				this.mapGui.setSelectedCharacterPosition(null);
-				try
-				{
-					this.right = ImageIO.read(new File("img/botScreen/"+playingTeam.getColorTeam()+"/right.png"));
-				} catch (IOException e1)
-				{
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-
-			} else
-			{
-				this.mapGui.paintGivenCell(this.characterSelected.getCellTraveled().getPosition(), playingTeam.getColorTeam().toString());
-				this.mapGui.paintGivenCell(playingTeam.getCharacter()[1].getCellTraveled().getPosition(),
-						playingTeam.getColorTeam() + "Selected");
-				this.characterSelected = playingTeam.getCharacter()[1];
-				this.mapGui.setSelectedCharacterPosition(playingTeam.getCharacter()[1].getCellTraveled()
-						.getPosition());
-				try
-				{
-					this.right = ImageIO.read(new File("img/botScreen/"+playingTeam.getColorTeam()+"/rightZ.png"));
-				} catch (IOException e1)
-				{
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
+			if (playingTeam.getCharacter()[1].isAlive())
+				zKeyProcess(playingTeam);
 			this.repaint();
 			break;
 						/* *****************************Character 3******************* */
@@ -559,6 +512,57 @@ public class BottomPanel extends JPanel implements KeyListener
 				}
 				break;
 			default:
+			}
+		}
+	}
+
+	private void zKeyProcess(Team playingTeam)
+	{
+		if (this.characterSelected == null)
+		{
+			this.mapGui.paintGivenCell(playingTeam.getCharacter()[1].getCellTraveled().getPosition(),
+					playingTeam.getColorTeam() + "Selected");
+			this.characterSelected = playingTeam.getCharacter()[1];
+			this.mapGui.setSelectedCharacterPosition(playingTeam.getCharacter()[1].getCellTraveled()
+					.getPosition());
+			try
+			{
+				this.right = ImageIO.read(new File("img/botScreen/"+playingTeam.getColorTeam()+"/rightZ.png"));
+			} catch (IOException e1)
+			{
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		} else if (this.characterSelected == playingTeam.getCharacter()[1])
+		{
+			this.mapGui.paintGivenCell(playingTeam.getCharacter()[1].getCellTraveled().getPosition(),
+					playingTeam.getColorTeam().toString());
+			this.characterSelected = null;
+			this.mapGui.setSelectedCharacterPosition(null);
+			try
+			{
+				this.right = ImageIO.read(new File("img/botScreen/"+playingTeam.getColorTeam()+"/right.png"));
+			} catch (IOException e1)
+			{
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+		} else
+		{
+			this.mapGui.paintGivenCell(this.characterSelected.getCellTraveled().getPosition(), playingTeam.getColorTeam().toString());
+			this.mapGui.paintGivenCell(playingTeam.getCharacter()[1].getCellTraveled().getPosition(),
+					playingTeam.getColorTeam() + "Selected");
+			this.characterSelected = playingTeam.getCharacter()[1];
+			this.mapGui.setSelectedCharacterPosition(playingTeam.getCharacter()[1].getCellTraveled()
+					.getPosition());
+			try
+			{
+				this.right = ImageIO.read(new File("img/botScreen/"+playingTeam.getColorTeam()+"/rightZ.png"));
+			} catch (IOException e1)
+			{
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 		}
 	}
