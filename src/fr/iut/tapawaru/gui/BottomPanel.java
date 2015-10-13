@@ -347,55 +347,8 @@ public class BottomPanel extends JPanel implements KeyListener
 		case 'e':
 			if(!(this.map.getSelectedCell()==null))
 				this.mapGui.changeCellState(currentCellPosition.getPositionX(),currentCellPosition.getPositionY());
-			if (!playingTeam.getCharacter()[2].isAlive())
-				break;
-			if (this.characterSelected == null)
-			{
-				this.mapGui.paintGivenCell(playingTeam.getCharacter()[2].getCellTraveled().getPosition(),
-						playingTeam.getColorTeam() + "Selected");
-				this.characterSelected = playingTeam.getCharacter()[2];
-				this.mapGui.setSelectedCharacterPosition(playingTeam.getCharacter()[2].getCellTraveled()
-						.getPosition());
-				try
-				{
-					this.right = ImageIO.read(new File("img/botScreen/"+playingTeam.getColorTeam()+"/rightE.png"));
-				} catch (IOException e1)
-				{
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			} else if (this.characterSelected == playingTeam.getCharacter()[2])
-			{
-				this.mapGui.paintGivenCell(playingTeam.getCharacter()[2].getCellTraveled().getPosition(),
-						playingTeam.getColorTeam().toString());
-				this.characterSelected = null;
-				this.mapGui.setSelectedCharacterPosition(null);
-				try
-				{
-					this.right = ImageIO.read(new File("img/botScreen/"+playingTeam.getColorTeam()+"/right.png"));
-				} catch (IOException e1)
-				{
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-
-			} else
-			{
-				this.mapGui.paintGivenCell(this.characterSelected.getCellTraveled().getPosition(), playingTeam.getColorTeam().toString());
-				this.mapGui.paintGivenCell(playingTeam.getCharacter()[2].getCellTraveled().getPosition(),
-						playingTeam.getColorTeam() + "Selected");
-				this.characterSelected = playingTeam.getCharacter()[2];
-				this.mapGui.setSelectedCharacterPosition(playingTeam.getCharacter()[2].getCellTraveled()
-						.getPosition());
-				try
-				{
-					this.right = ImageIO.read(new File("img/botScreen/"+playingTeam.getColorTeam()+"/rightE.png"));
-				} catch (IOException e1)
-				{
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
+			if (playingTeam.getCharacter()[2].isAlive())
+				eKeyProcess(playingTeam);
 			this.repaint();
 			break;
 		default:
@@ -512,6 +465,57 @@ public class BottomPanel extends JPanel implements KeyListener
 				}
 				break;
 			default:
+			}
+		}
+	}
+
+	private void eKeyProcess(Team playingTeam)
+	{
+		if (this.characterSelected == null)
+		{
+			this.mapGui.paintGivenCell(playingTeam.getCharacter()[2].getCellTraveled().getPosition(),
+					playingTeam.getColorTeam() + "Selected");
+			this.characterSelected = playingTeam.getCharacter()[2];
+			this.mapGui.setSelectedCharacterPosition(playingTeam.getCharacter()[2].getCellTraveled()
+					.getPosition());
+			try
+			{
+				this.right = ImageIO.read(new File("img/botScreen/"+playingTeam.getColorTeam()+"/rightE.png"));
+			} catch (IOException e1)
+			{
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		} else if (this.characterSelected == playingTeam.getCharacter()[2])
+		{
+			this.mapGui.paintGivenCell(playingTeam.getCharacter()[2].getCellTraveled().getPosition(),
+					playingTeam.getColorTeam().toString());
+			this.characterSelected = null;
+			this.mapGui.setSelectedCharacterPosition(null);
+			try
+			{
+				this.right = ImageIO.read(new File("img/botScreen/"+playingTeam.getColorTeam()+"/right.png"));
+			} catch (IOException e1)
+			{
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+		} else
+		{
+			this.mapGui.paintGivenCell(this.characterSelected.getCellTraveled().getPosition(), playingTeam.getColorTeam().toString());
+			this.mapGui.paintGivenCell(playingTeam.getCharacter()[2].getCellTraveled().getPosition(),
+					playingTeam.getColorTeam() + "Selected");
+			this.characterSelected = playingTeam.getCharacter()[2];
+			this.mapGui.setSelectedCharacterPosition(playingTeam.getCharacter()[2].getCellTraveled()
+					.getPosition());
+			try
+			{
+				this.right = ImageIO.read(new File("img/botScreen/"+playingTeam.getColorTeam()+"/rightE.png"));
+			} catch (IOException e1)
+			{
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 		}
 	}
